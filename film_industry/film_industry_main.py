@@ -1,19 +1,19 @@
 """
 ########################################################
-# umdb_main.py: Main execution script.                 #
+# film_industry_main.py: Main execution script.                 #
 ########################################################
 """
 
 import codecs
-import umdb_mojo
-import umdb_processing
-import umdb_arff
+import film_industry_mojo
+import film_industry_processing
+import film_industry_arff
 
 # Fetch all the raw data
-rawData = umdb_mojo.getAllMovieData()
+rawData = film_industry_mojo.getAllMovieData()
 
 # Process raw data suitable for arff
-processedData = umdb_processing.doRefine(rawData)
+processedData = film_industry_processing.doRefine(rawData)
 
 # Write the processed data to new arff file
-umdb_arff.writeARFFfile(processedData, codecs.open('ultimateMovieDB_beforeProcessing.arff','w', 'utf-8'))
+film_industry_arff.writeARFFfile(processedData, codecs.open('ultimateMovieDB_beforeProcessing.arff','w', 'utf-8'))

@@ -1,6 +1,6 @@
 """
 ###########################################################################
-# umdb_arff.py: This module gets the processed data as                    #
+# film_industry_arff.py: This module gets the processed data as                    #
 # input and writes them as arff file, along with header information.      #
 # Please refer to http://weka.wikispaces.com/ARFF+%28developer+version%29 # 
 # for more detailed description of arff format.							  #
@@ -10,23 +10,23 @@
 """
 
 import arff
-import umdb_settings
+import film_industry_settings
 
 def writeARFFfile(dataList, fileObject):
 
 	# Get attribute declarations
-	attributeList = umdb_settings.attributeList
+	attributeList = film_industry_settings.attributeList
 	
 	# Add class variable if needed - please uncomment corresponding sections
 	# from other modules as well.
-	# classificationTarget = umdb_settings.classificationTarget
+	# classificationTarget = film_industry_settings.classificationTarget
 	# attributeList.append(('class', classificationTarget))
 
 	# arff.dump takes a dictionary as an input
 	dataARFFdict = {}
 
 	# relation declaration
-	dataARFFdict['relation'] = umdb_settings.relation
+	dataARFFdict['relation'] = film_industry_settings.relation
 	# attribute declaration
 	dataARFFdict['attributes'] = attributeList
 	# data declaration

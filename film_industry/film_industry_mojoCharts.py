@@ -1,13 +1,13 @@
 """
 ########################################################################################
-# umdb_mojoCharts.py: This modules provides functions for acquiring lists              #
+# film_industry_mojoCharts.py: This modules provides functions for acquiring lists              #
 # that contain the following info: (1) Names of top 150 Hollywood actors, producers,   #
 # and directors by gross revenue. (2) Title of movies that are part of any franchises. #
 ########################################################################################
 """
 
 import lxml.html
-import umdb_http
+import film_industry_http
 
 def getTop100Actors():
 
@@ -16,7 +16,7 @@ def getTop100Actors():
 	actorsInTop100 = []
 	
 	# Get the first 50 people
-	mojoTopActors50Page = umdb_http.getPage('http://www.boxofficemojo.com/people/?view=Actor&pagenum=1&sort=sumgross&order=DESC&&p=.htm')
+	mojoTopActors50Page = film_industry_http.getPage('http://www.boxofficemojo.com/people/?view=Actor&pagenum=1&sort=sumgross&order=DESC&&p=.htm')
 	
 	# If we can't get any response from the url above, return what we have so far (= empty).
 	if mojoTopActors50Page == None:
@@ -38,7 +38,7 @@ def getTop100Actors():
 	# Move on to other 50
 	# At the moment, the page actually gives us names up to #150, not #100.
 	# We just get 150 people because it doesn't really matter for our purpose.
-	mojoTopActors100Page = umdb_http.getPage('http://www.boxofficemojo.com/people/?view=Actor&pagenum=2&sort=sumgross&order=DESC&&p=.htm')
+	mojoTopActors100Page = film_industry_http.getPage('http://www.boxofficemojo.com/people/?view=Actor&pagenum=2&sort=sumgross&order=DESC&&p=.htm')
 	
 	# If we can't get any response from the url above, return what we have so far (= first 50).
 	if mojoTopActors100Page == None:
@@ -67,7 +67,7 @@ def getTop100Producers():
 	producersInTop100 = []
 	
 	# Get the first 50 people
-	mojoTopProducers50Page = umdb_http.getPage('http://www.boxofficemojo.com/people/?view=Producer&pagenum=1&sort=sumgross&order=DESC&&p=.htm')
+	mojoTopProducers50Page = film_industry_http.getPage('http://www.boxofficemojo.com/people/?view=Producer&pagenum=1&sort=sumgross&order=DESC&&p=.htm')
 	
 	# If we can't get any response from the url above, return what we have so far (= empty).
 	if mojoTopProducers50Page == None:
@@ -89,7 +89,7 @@ def getTop100Producers():
 	# Move on to other 50
 	# At the moment, the page actually gives us names up to #150, not #100.
 	# We just get 150 people because it doesn't really matter for our purpose.
-	mojoTopProducers100Page = umdb_http.getPage('http://www.boxofficemojo.com/people/?view=Producer&pagenum=2&sort=sumgross&order=DESC&&p=.htm')
+	mojoTopProducers100Page = film_industry_http.getPage('http://www.boxofficemojo.com/people/?view=Producer&pagenum=2&sort=sumgross&order=DESC&&p=.htm')
 	
 	# If we can't get any response from the url above, return what we have so far (= first 50).
 	if mojoTopProducers100Page == None:
@@ -116,7 +116,7 @@ def getTop100Directors():
 	# will be put into this list and be returned.
 	directorsInTop100 = []
 	
-	mojoTopDirectors50Page = umdb_http.getPage('http://www.boxofficemojo.com/people/?view=Director&pagenum=1&sort=sumgross&order=DESC&&p=.htm')
+	mojoTopDirectors50Page = film_industry_http.getPage('http://www.boxofficemojo.com/people/?view=Director&pagenum=1&sort=sumgross&order=DESC&&p=.htm')
 	
 	if mojoTopDirectors50Page == None:
 		return directorsInTop100
@@ -129,7 +129,7 @@ def getTop100Directors():
 	for director in mojoTopDirectors50Iterator:
 		directorsInTop100.append(str.lower(director.xpath('string(.//td[2])')))
 	
-	mojoTopDirectors100Page = umdb_http.getPage('http://www.boxofficemojo.com/people/?view=Director&pagenum=2&sort=sumgross&order=DESC&&p=.htm')
+	mojoTopDirectors100Page = film_industry_http.getPage('http://www.boxofficemojo.com/people/?view=Director&pagenum=2&sort=sumgross&order=DESC&&p=.htm')
 	
 	if mojoTopDirectors100Page == None:
 		return directorsInTop100		
@@ -147,7 +147,7 @@ def getTop100Directors():
 def getFranchises():
 	franchisesList = []
 	
-	mojoFranchisesPage = umdb_http.getPage('http://www.boxofficemojo.com/franchises/')
+	mojoFranchisesPage = film_industry_http.getPage('http://www.boxofficemojo.com/franchises/')
 	
 	if mojoFranchisesPage == None:
 		return franchisesList
@@ -168,7 +168,7 @@ def getFranchises():
 def getFranchiseMovies(franchiseHref):
 	movieInFranchise = []
 	
-	mojoFranchisePage = umdb_http.getPage(franchiseHref)
+	mojoFranchisePage = film_industry_http.getPage(franchiseHref)
 	
 	if mojoFranchisePage == None:
 		return movieInFranchise

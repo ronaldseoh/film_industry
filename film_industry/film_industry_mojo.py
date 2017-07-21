@@ -1,13 +1,13 @@
 """
 ################################################################################################
-# umdb_mojo.py: This module acquires data from Box Office Mojo (http://www.boxofficemojo.com), #
+# film_industry_mojo.py: This module acquires data from Box Office Mojo (http://www.boxofficemojo.com), #
 # our primary dataset for the project.			         									   #
 ################################################################################################
 """
 
-import umdb_settings
-import umdb_omdb
-import umdb_http
+import film_industry_settings
+import film_industry_omdb
+import film_industry_http
 import lxml.html
 import re
 import time
@@ -15,12 +15,12 @@ import datetime
 
 def getAllMovieData():
 
-	yearStart = umdb_settings.yearStart
-	yearEnd = umdb_settings.yearEnd
+	yearStart = film_industry_settings.yearStart
+	yearEnd = film_industry_settings.yearEnd
 	
 	allMovieDataList = []
 	
-	mojoIndexPage = umdb_http.getPage('http://www.boxofficemojo.com/movies/')
+	mojoIndexPage = film_industry_http.getPage('http://www.boxofficemojo.com/movies/')
 
 	if mojoIndexPage == None:
 		return allMovieDataList
@@ -35,7 +35,7 @@ def getAllMovieData():
 	
 	for alpha in alphabetLinks:
 		alpha.make_links_absolute()
-		mojoAlphabetPage = umdb_http.getPage(alpha.xpath('.//@href')[0])
+		mojoAlphabetPage = film_industry_http.getPage(alpha.xpath('.//@href')[0])
 		
 		if mojoAlphabetPage == None:
 			break
@@ -59,7 +59,7 @@ def processMojoAlphabet(alphabetLink, yearStart, yearEnd):
 
 	movieDataList = []
 	
-	mojoAlphabetPage = umdb_http.getPage(alphabetLink)
+	mojoAlphabetPage = film_industry_http.getPage(alphabetLink)
 
 	if mojoAlphabetPage == None:
 		return None
@@ -112,7 +112,7 @@ def processMojoMovie(movieLink):
 
 	movieValue = {}
 	
-	mojoMoviePage = umdb_http.getPage(movieLink)
+	mojoMoviePage = film_industry_http.getPage(movieLink)
 
 	if mojoMoviePage == None:
 		return None
@@ -295,7 +295,7 @@ def processMojoMovie(movieLink):
 	movieValue['producers'] = producersStringList
 	
 	# Get other data about this movie from OMDb and combine them with existing data (dictionary)
-	OMDbData = umdb_omdb.getOMDbData(titleOMDbSearchString, yearOMDbSearchString)
+	OMDbData = film_industry_omdb.getOMDbData(titleOMDbSearchString, yearOMDbSearchString)
 	movieValue.update(OMDbData)
 		
 	# Print extracted data for each movie

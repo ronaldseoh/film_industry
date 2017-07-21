@@ -1,6 +1,6 @@
 """
 ###############################################################################
-# umdb_http.py: This modules processes HTTP requests needed by other modules. #
+# film_industry_http.py: This modules processes HTTP requests needed by other modules. #
 ###############################################################################
 """
 import urllib2

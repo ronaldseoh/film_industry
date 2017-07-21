@@ -1,6 +1,6 @@
 """
 ##################################################################
-# umdb_settings.py: This module contains variables with various  # 
+# film_industry_settings.py: This module contains variables with various  # 
 # criteria or settings needed for crawling and processing.       #
 # Please modify based on your needs.                             #
 ##################################################################

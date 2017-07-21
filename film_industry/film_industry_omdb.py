@@ -1,17 +1,17 @@
 """
 ###############################################################################
-# umdb_omdb.py: This modules gathers data from OMDb (http://www.omdbapi.com). #
+# film_industry_omdb.py: This modules gathers data from OMDb (http://www.omdbapi.com). #
 ###############################################################################
 """
 
-import umdb_http
+import film_industry_http
 
 def getOMDbJSONResponse(title, year):
 
 	OMDbJSONUrl = 'http://www.omdbapi.com/?t=' + title + '&type=movie&y=' + year + '&plot=short&tomatoes=true'
 	OMDbJSONUrl = OMDbJSONUrl.replace(' ', '%20')
 
-	response = umdb_http.getJSON(OMDbJSONUrl, 20)
+	response = film_industry_http.getJSON(OMDbJSONUrl, 20)
 	
 	return response
 

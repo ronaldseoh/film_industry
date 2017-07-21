@@ -1,21 +1,21 @@
 """
 ###############################################################################
-# umdb_processing.py: This modules processes acquired data based on our needs #
+# film_industry_processing.py: This modules processes acquired data based on our needs #
 # and converts them to format suitable for liac-arff module.                  #
 ###############################################################################
 """
 import time
 import re
 import traceback
-import umdb_mojoCharts
-import umdb_settings
+import film_industry_mojoCharts
+import film_industry_settings
 
 def doRefine(rawDataList):
 
-	top100ActorsR = umdb_mojoCharts.getTop100Actors()
-	top100ProducersR = umdb_mojoCharts.getTop100Producers()
-	top100DirectorsR = umdb_mojoCharts.getTop100Directors()
-	franchisesR = umdb_mojoCharts.getFranchises()
+	top100ActorsR = film_industry_mojoCharts.getTop100Actors()
+	top100ProducersR = film_industry_mojoCharts.getTop100Producers()
+	top100DirectorsR = film_industry_mojoCharts.getTop100Directors()
+	franchisesR = film_industry_mojoCharts.getFranchises()
 
 	newDataList = []
 
@@ -49,9 +49,9 @@ def doRefine(rawDataList):
 				newDataRow.append('?')
 			else:
 				newDataRow.append(rawDataRow['distributor'])
-				if rawDataRow['distributor'] in umdb_settings.majorDistributor:
+				if rawDataRow['distributor'] in film_industry_settings.majorDistributor:
 					newDataRow.append('Major')
-				elif rawDataRow['distributor'] in umdb_settings.miniMajorDistributor:
+				elif rawDataRow['distributor'] in film_industry_settings.miniMajorDistributor:
 					newDataRow.append('Mini-Major')
 				else:
 					newDataRow.append('Others')
@@ -125,7 +125,7 @@ def doRefine(rawDataList):
 				
 			# Wide/Limited Release
 			try:
-				if int(rawDataRow['widestReleases'].replace(',','')) >= umdb_settings.limitedCriteria:
+				if int(rawDataRow['widestReleases'].replace(',','')) >= film_industry_settings.limitedCriteria:
 					newDataRow.append('Wide')
 				else:
 					newDataRow.append('Limited')
